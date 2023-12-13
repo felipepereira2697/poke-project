@@ -3,6 +3,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,7 +35,8 @@ public class Main {
                 .uri(URI.create(url))
                 .GET()
                 .build();
-        //This requires to be inside of a try/catch block
+        //This requires to be inside of a try/catch block or it add the throws exception on method
+        //signature
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println("###SYNC CALL###");
