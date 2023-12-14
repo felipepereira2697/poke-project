@@ -10,8 +10,9 @@ public class Main {
 
         String url = "https://pokeapi.co/api/v2/pokemon/munchlax";
 
-        getPokemonByName(url);
-        getPokemonByNameAsync(url);
+        HttpResponse<String> response = getPokemonByName(url);
+
+        //getPokemonByNameAsync(url);
 
     }
 
@@ -29,7 +30,8 @@ public class Main {
                 .join();
     }
 
-    private static void getPokemonByName(String url) {
+    private static HttpResponse<String> getPokemonByName(String url) {
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -39,16 +41,24 @@ public class Main {
         //signature
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
             System.out.println("###SYNC CALL###");
             System.out.println(response.statusCode());
             System.out.println(response.body());
-        }catch(IOException ex) {
+            return response;
+        } catch (IOException ex) {
             System.out.println(ex.getMessage());
-        }catch(InterruptedException ex) {
+        } catch (InterruptedException ex) {
             System.out.println(ex.getMessage());
         }
 
-
+        return null;
     }
 
+    class Pokemon {
+        private String Name;
+        private String Id;
+        private Double Weight;
+        private String imageURL;
+    }
 }
