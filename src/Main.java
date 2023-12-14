@@ -3,15 +3,16 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Duration;
+
 
 public class Main {
     public static void main(String[] args) {
 
-        String url = "https://pokeapi.co/api/v2/pokemon/munchlax";
+        String url = "https://pokeapi.co/api/v2/pokemon?limit=250&offset=0";
 
         HttpResponse<String> response = getPokemonByName(url);
-
+        String respBody = response.body();
+        System.out.println(respBody);
         //getPokemonByNameAsync(url);
 
     }
@@ -44,7 +45,7 @@ public class Main {
 
             System.out.println("###SYNC CALL###");
             System.out.println(response.statusCode());
-            System.out.println(response.body());
+            //System.out.println(response.body());
             return response;
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
