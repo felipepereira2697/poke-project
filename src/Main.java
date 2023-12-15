@@ -12,7 +12,7 @@ public class Main {
 
         HttpResponse<String> response = getPokemonByName(url);
         String respBody = response.body();
-        System.out.println(respBody);
+        System.out.println("respBody --> "+respBody);
         //getPokemonByNameAsync(url);
 
     }
@@ -47,9 +47,7 @@ public class Main {
             System.out.println(response.statusCode());
             //System.out.println(response.body());
             return response;
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        } catch (InterruptedException ex) {
+        } catch (IOException | InterruptedException ex) {
             System.out.println(ex.getMessage());
         }
 
