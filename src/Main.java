@@ -3,6 +3,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Main {
@@ -13,8 +15,23 @@ public class Main {
         HttpResponse<String> response = getPokemonByName(url);
         String respBody = response.body();
         System.out.println("respBody --> "+respBody);
+        parseJsonPokemons(respBody);
         //getPokemonByNameAsync(url);
 
+    }
+
+    private static String[] parseJsonPokemons(String json) {
+
+        Matcher matcher = Pattern.compile(".*\\[(.*)\\].*").matcher(json);
+        if(!matcher.matches()) {
+            throw  new IllegalArgumentException("No match in "+json);
+
+        }
+
+        String[] pokemonArray = matcher.group(1).split("\\},\\{");
+        pokemonArray[0] = pokemonArray[0].substring(1);
+        System.out.println("Pokemon array at 0 --> "+pokemonArray[0]);
+        return pokemonArray;
     }
 
     private static void getPokemonByNameAsync(String url) {
