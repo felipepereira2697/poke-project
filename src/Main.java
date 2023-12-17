@@ -29,8 +29,9 @@ public class Main {
         }
 
         String[] pokemonArray = matcher.group(1).split("\\},\\{");
-        pokemonArray[0] = pokemonArray[0].substring(1);
-        System.out.println("Pokemon array at 0 --> "+pokemonArray[0]);
+        for (String s : pokemonArray) {
+            System.out.println("Pokemon --> "+s);
+        }
         return pokemonArray;
     }
 
@@ -72,9 +73,9 @@ public class Main {
     }
 
     class Pokemon {
-        private String Name;
-        private String Id;
-        private Double Weight;
-        private String imageURL;
+        private String name;
+        private String id;
+        private Double weight;
+        private String url;
     }
 }
