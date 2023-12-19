@@ -32,7 +32,8 @@ public class Main {
         for (String s : pokemonArray) {
             //@TODO here I want to split the names and the urls and save those in text file
 
-            System.out.println("Pokemon name is "+findPokemonName(s));
+            System.out.println("Pokemon name is "+findPokemonName(s)+" and url for is: "+findPokemonUrl(s));
+
         }
         return pokemonArray;
     }
@@ -40,6 +41,16 @@ public class Main {
     private static String findPokemonName(String s) {
         String newS = s.substring(s.indexOf("\"name\":\""), s.indexOf("\","));
         String cleanString = newS.replace("\"name\":\"","");
+
+        return cleanString;
+    }
+
+    //The idea of this method is to receive
+    //E.g: //"name":"lugia","url":"https://pokeapi.co/api/v2/pokemon/249/"
+    //Return: https://pokeapi.co/api/v2/pokemon/249/
+    private static String findPokemonUrl(String s) {
+        String newS = s.substring(s.indexOf("\"url\":\""));
+        String cleanString = newS.replace("\"url\":\"","").replace("\"","").replace("}","");
 
         return cleanString;
     }
