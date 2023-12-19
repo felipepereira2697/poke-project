@@ -30,9 +30,18 @@ public class Main {
 
         String[] pokemonArray = matcher.group(1).split("\\},\\{");
         for (String s : pokemonArray) {
-            System.out.println("Pokemon --> "+s);
+            //@TODO here I want to split the names and the urls and save those in text file
+
+            System.out.println("Pokemon name is "+findPokemonName(s));
         }
         return pokemonArray;
+    }
+
+    private static String findPokemonName(String s) {
+        String newS = s.substring(s.indexOf("\"name\":\""), s.indexOf("\","));
+        String cleanString = newS.replace("\"name\":\"","");
+
+        return cleanString;
     }
 
     private static void getPokemonByNameAsync(String url) {
