@@ -3,6 +3,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,14 +15,16 @@ public class Main {
 
         HttpResponse<String> response = getPokemonByName(url);
         String respBody = response.body();
-        System.out.println("respBody --> "+respBody);
+
         parseJsonPokemons(respBody);
+
+        //async call if needed.
         //getPokemonByNameAsync(url);
 
     }
 
-    private static String[] parseJsonPokemons(String json) {
-
+    private static ArrayList<Pokemon> parseJsonPokemons(String json) {
+        ArrayList<Pokemon> pokemonList = new ArrayList<Pokemon>();
         Matcher matcher = Pattern.compile(".*\\[(.*)\\].*").matcher(json);
         if(!matcher.matches()) {
             throw  new IllegalArgumentException("No match in "+json);
@@ -30,13 +33,16 @@ public class Main {
 
         String[] pokemonArray = matcher.group(1).split("\\},\\{");
         for (String s : pokemonArray) {
-            //@TODO here I want to split the names and the urls and save those in text file
 
-            System.out.println("Pokemon name is "+findPokemonName(s)+" and url for is: "+findPokemonUrl(s));
-
+            Pokemon pokemon = new Pokemon(findPokemonName(s), findPokemonUrl(s));
+            System.out.println(pokemon.toString());
+            pokemonList.add(pokemon);
         }
-        return pokemonArray;
+
+
+        return pokemonList;
     }
+
 
     private static String findPokemonName(String s) {
         String newS = s.substring(s.indexOf("\"name\":\""), s.indexOf("\","));
@@ -92,10 +98,4 @@ public class Main {
         return null;
     }
 
-    class Pokemon {
-        private String name;
-        private String id;
-        private Double weight;
-        private String url;
-    }
 }
