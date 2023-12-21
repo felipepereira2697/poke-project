@@ -45,20 +45,20 @@ public class Main {
 
 
     private static String findPokemonName(String s) {
-        String newS = s.substring(s.indexOf("\"name\":\""), s.indexOf("\","));
-        String cleanString = newS.replace("\"name\":\"","");
+        String sanitizedString = s.substring(s.indexOf("\"name\":\""), s.indexOf("\","));
+        String pokemonName = sanitizedString.replace("\"name\":\"","");
 
-        return cleanString;
+        return pokemonName;
     }
 
     //The idea of this method is to receive
     //E.g: //"name":"lugia","url":"https://pokeapi.co/api/v2/pokemon/249/"
     //Return: https://pokeapi.co/api/v2/pokemon/249/
     private static String findPokemonUrl(String s) {
-        String newS = s.substring(s.indexOf("\"url\":\""));
-        String cleanString = newS.replace("\"url\":\"","").replace("\"","").replace("}","");
+        String sanitizeUrl = s.substring(s.indexOf("\"url\":\""));
+        String pokemonUrl = sanitizeUrl.replace("\"url\":\"","").replace("\"","").replace("}","");
 
-        return cleanString;
+        return pokemonUrl;
     }
 
     private static void getPokemonByNameAsync(String url) {
