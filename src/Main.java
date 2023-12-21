@@ -35,11 +35,11 @@ public class Main {
         for (String s : pokemonArray) {
 
             Pokemon pokemon = new Pokemon(findPokemonName(s), findPokemonUrl(s));
-            System.out.println(pokemon.toString());
+
             pokemonList.add(pokemon);
         }
 
-
+        pokemonList.forEach(System.out::println);
         return pokemonList;
     }
 
