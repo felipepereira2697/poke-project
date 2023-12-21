@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -17,6 +20,8 @@ public class Main {
         String respBody = response.body();
 
         parseJsonPokemons(respBody);
+
+        generateHTML();
 
         //async call if needed.
         //getPokemonByNameAsync(url);
@@ -43,6 +48,22 @@ public class Main {
         return pokemonList;
     }
 
+
+    private static void generateHTML() {
+        File file = new File("index.html");
+
+        String head = "<html><h1 style=\"color: yellow;\">First test here</h1></html>";
+        try {
+            PrintWriter pw = new PrintWriter(file);
+            pw.write(head);
+            pw.close();
+        }catch (FileNotFoundException ex ) {
+            System.out.println(ex.getMessage());
+        }
+
+
+//        System.out.println(head);
+    }
 
     private static String findPokemonName(String s) {
         String sanitizedString = s.substring(s.indexOf("\"name\":\""), s.indexOf("\","));
