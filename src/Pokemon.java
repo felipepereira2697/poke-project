@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Pokemon {
     private String name;
     private String url;
