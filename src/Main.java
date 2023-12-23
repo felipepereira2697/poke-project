@@ -19,9 +19,9 @@ public class Main {
         HttpResponse<String> response = getPokemonByName(url);
         String respBody = response.body();
 
-        parseJsonPokemons(respBody);
+        ArrayList<Pokemon> pokemonsList =  parseJsonPokemons(respBody);
 
-        generateHTML();
+        generateHTML(pokemonsList);
 
         //async call if needed.
         //getPokemonByNameAsync(url);
@@ -49,10 +49,16 @@ public class Main {
     }
 
 
-    private static void generateHTML() {
+    private static void generateHTML(ArrayList<Pokemon> pokemonsList) {
         File file = new File("index.html");
 
-        String head = "<html><h1 style=\"color: yellow;\">First test here</h1></html>";
+        String head = "<html><body><h1 style=\"color: yellow;\">Pokemon List</h1>";
+       for (Pokemon item : pokemonsList) {
+           String pokemon = "<div>"+item.getName()+" - "+item.getUrl()+" </div>";
+           head = head.concat(pokemon);
+       }
+       head.concat("</body></html>");
+
         try {
             PrintWriter pw = new PrintWriter(file);
             pw.write(head);
