@@ -23,7 +23,7 @@ public class Main {
 
         generateHTML(pokemonsList);
 
-        //async call if needed.
+        //async call to api if needed.
         //getPokemonByNameAsync(url);
 
     }
