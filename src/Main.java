@@ -1,5 +1,6 @@
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
         HttpResponse<String> response = PokemonBO.getPokemonData(url);
         String respBody = response.body();
 
-        ArrayList<Pokemon> pokemonsList =  PokemonBO.parseJsonPokemons(respBody);
+        List<Pokemon> pokemonsList =  PokemonBO.parseJsonPokemons(respBody);
 
         HTMLGenerator.generateHTML(pokemonsList);
 

@@ -4,12 +4,13 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PokemonBO {
-    static ArrayList<Pokemon> parseJsonPokemons(String json) {
-        ArrayList<Pokemon> pokemonList = new ArrayList<Pokemon>();
+    static List<Pokemon> parseJsonPokemons(String json) {
+        List<Pokemon> pokemonList = new ArrayList<Pokemon>();
         Matcher matcher = Pattern.compile(".*\\[(.*)\\].*").matcher(json);
         if(!matcher.matches()) {
             throw  new IllegalArgumentException("No match in "+json);

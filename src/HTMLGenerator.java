@@ -2,10 +2,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HTMLGenerator {
 
-    static void generateHTML(ArrayList<Pokemon> pokemonsList) {
+    static void generateHTML(List<Pokemon> pokemonsList) {
         File file = new File("index.html");
 
 
