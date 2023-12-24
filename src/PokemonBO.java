@@ -39,7 +39,10 @@ public class PokemonBO {
 
 
         HttpResponse<String> response = getPokemonData(pokemonURL);
-        String respBody = response.body();
+        String respBody = null;
+        if (response != null) {
+            respBody = response.body();
+        }
         String sprites = respBody.substring(respBody.indexOf("\"sprites\":"), respBody.indexOf("\"front_female\""));
         String pokemonImg = sprites.substring(sprites.indexOf("\"front_default\"")).replaceAll("\"","").replace(",","").replace("front_default:","");
 

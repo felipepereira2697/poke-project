@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class HTMLGenerator {
@@ -23,6 +22,7 @@ public class HTMLGenerator {
             PrintWriter pw = new PrintWriter(file);
             pw.write(htmlBody);
             pw.close();
+
         }catch (FileNotFoundException ex ) {
             System.out.println(ex.getMessage());
         }

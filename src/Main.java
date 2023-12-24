@@ -9,7 +9,12 @@ public class Main {
         String url = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
 
         HttpResponse<String> response = PokemonBO.getPokemonData(url);
-        String respBody = response.body();
+
+
+        String respBody = "";
+        if (response != null) {
+            respBody = response.body();
+        }
 
         List<Pokemon> pokemonsList =  PokemonBO.parseJsonPokemons(respBody);
 
