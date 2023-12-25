@@ -6,7 +6,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        String url = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
+        String url = "https://pokeapi.co/api/v2/pokemon?limit=9&offset=0";
 
         HttpResponse<String> response = PokemonBO.getPokemonData(url);
 

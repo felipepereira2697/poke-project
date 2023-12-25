@@ -41,8 +41,10 @@ public class PokemonBO {
         if (response != null) {
             respBody = response.body();
         }
-        String sprites = respBody.substring(respBody.indexOf("\"sprites\":"), respBody.indexOf("\"front_female\""));
-        String pokemonImg = sprites.substring(sprites.indexOf("\"front_default\"")).replaceAll("\"","").replace(",","").replace("front_default:","");
+        
+        String sprites = respBody.substring(respBody.indexOf("\"sprites\":"), respBody.indexOf("\"home\""));
+        String pokemonDreamWorldImage = sprites.substring(sprites.indexOf("\"dream_world\":"), sprites.lastIndexOf("\"front_female\""));
+        String pokemonImg = pokemonDreamWorldImage.substring(pokemonDreamWorldImage.indexOf("\"front_default\"")).replaceAll("\"","").replace(",","").replace("front_default:","");
 
         return pokemonImg;
     }
