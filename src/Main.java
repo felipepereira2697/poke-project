@@ -6,8 +6,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        String url = "https://pokeapi.co/api/v2/pokemon?limit=9&offset=0";
-
+        String url = "https://pokeapi.co/api/v2/pokemon?limit=500&offset=0";
         HttpResponse<String> response = PokemonBO.getPokemonData(url);
 
 
@@ -17,12 +16,10 @@ public class Main {
         }
 
         List<Pokemon> pokemonsList =  PokemonBO.parseJsonPokemons(respBody);
-
         HTMLGenerator.generateHTML(pokemonsList);
 
         //async call to api if needed.
         //getPokemonByNameAsync(url);
-
     }
 
 
