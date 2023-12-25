@@ -18,10 +18,10 @@ public class PokemonBO {
 
         String[] pokemonArray = matcher.group(1).split("\\},\\{");
 
-        for (String s : pokemonArray) {
+        for (String item : pokemonArray) {
             //Building pokemon instance
-            String pokemonURL = findPokemonUrl(s);
-            String pokemonName = findPokemonName(s);
+            String pokemonURL = findPokemonUrl(item);
+            String pokemonName = findPokemonName(item);
             String pokemonImage = findPokemonImage(pokemonURL);
             Pokemon pokemon = new Pokemon(pokemonName, pokemonURL, pokemonImage);
 
@@ -35,8 +35,6 @@ public class PokemonBO {
     private static String findPokemonImage(String pokemonURL) {
 
         String pokeUrl = pokemonURL.substring(pokemonURL.indexOf("/pokemon/"), pokemonURL.lastIndexOf("/"));
-        String pokeId = pokeUrl.replace("/pokemon/","");
-
 
         HttpResponse<String> response = getPokemonData(pokemonURL);
         String respBody = null;
@@ -67,13 +65,13 @@ public class PokemonBO {
     }
 
     private static void getPokemonByNameAsync(String url) {
+        System.out.println("###ASYNC CALL###");
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .build();
 
-        System.out.println("###ASYNC CALL###");
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .thenAccept(System.out::println)
