@@ -1,14 +1,12 @@
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class Main {
     public static void main(String[] args) {
 
-        String url = "https://pokeapi.co/api/v2/pokemon?limit=500&offset=0";
-        HttpResponse<String> response = PokemonBO.getPokemonData(url);
-
+        String url = "https://pokeapi.co/api/v2/pokemon?limit=30&offset=0";
+        HttpResponse<String> response = HttpHandler.getData(url);
 
         String respBody = "";
         if (response != null) {

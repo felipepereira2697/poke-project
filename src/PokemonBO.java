@@ -1,7 +1,3 @@
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +32,7 @@ public class PokemonBO {
 
         String pokeUrl = pokemonURL.substring(pokemonURL.indexOf("/pokemon/"), pokemonURL.lastIndexOf("/"));
 
-        HttpResponse<String> response = getPokemonData(pokemonURL);
+        HttpResponse<String> response = HttpHandler.getData(pokemonURL);
         String respBody = null;
         if (response != null) {
             respBody = response.body();
@@ -64,40 +60,5 @@ public class PokemonBO {
         String pokemonUrl = sanitizeUrl.replace("\"url\":\"","").replace("\"","").replace("}","");
 
         return pokemonUrl;
-    }
-
-    private static void getPokemonByNameAsync(String url) {
-        System.out.println("###ASYNC CALL###");
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .build();
-
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
-                .thenAccept(System.out::println)
-                .join();
-    }
-
-    static HttpResponse<String> getPokemonData(String url) {
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .build();
-        //This requires to be inside of a try/catch block or it add the throws exception on method
-        //signature
-        try {
-            System.out.println("###SYNC CALL###");
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            return response;
-        } catch (IOException | InterruptedException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return null;
     }
 }
