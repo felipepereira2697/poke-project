@@ -24,7 +24,7 @@ public class PokemonBO {
             pokemonList.add(pokemon);
         }
 
-        pokemonList.forEach(System.out::println);
+//        pokemonList.forEach(System.out::println);
         return pokemonList;
     }
 
