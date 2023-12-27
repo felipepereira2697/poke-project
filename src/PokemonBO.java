@@ -30,8 +30,6 @@ public class PokemonBO {
 
     private static String findPokemonImage(String pokemonURL) {
 
-        String pokeUrl = pokemonURL.substring(pokemonURL.indexOf("/pokemon/"), pokemonURL.lastIndexOf("/"));
-
         HttpResponse<String> response = HttpHandler.getData(pokemonURL);
         String respBody = null;
         if (response != null) {
