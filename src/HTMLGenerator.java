@@ -14,8 +14,8 @@ public class HTMLGenerator {
         String body = "";
 
         for (Pokemon item : pokemonsList) {
-            String pokemon = "<div class=\"card\"><img src=\""+item.getImage()+"\" alt=\""+item.getName()+"\" style=\"width:100%\"><div class=\"container\"><h4><b>"+item.getName().toUpperCase()+"</b></h4><p><a href=\""+item.getUrl()+"\"> Click here to have more information</a></p></div></div>";
-            if(!body.contains(item.getUrl())) {
+            String pokemon = "<div class=\"card\"><img src=\""+item.image()+"\" alt=\""+item.name()+"\" style=\"width:100%\"><div class=\"container\"><h4><b>"+item.name().toUpperCase()+"</b></h4><p><a href=\""+item.url()+"\"> Click here to have more information</a></p></div></div>";
+            if(!body.contains(item.url())) {
                 body = body.concat(pokemon);
                 System.out.println("Pokemon Item "+body);
             }
